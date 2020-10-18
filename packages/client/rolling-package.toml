@@ -1,0 +1,13 @@
+name = "my-custom-client"
+
+dependencies = [
+  "my-custom-api",
+]
+
+tag_format = "AwesomeApp(v{{MAJOR}})-({{MINOR}}.{{PATCH}})"
+
+[scripts]
+# This example prepublish script blocks all odd major versions
+prepublish = "node prepublish"
+publish_dry_run = "node publish --dry-run"
+publish = "node publish"
