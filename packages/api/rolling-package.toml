@@ -1,6 +1,6 @@
 name = "my-custom-api"
 
-tag_format = "prod-{{MAJOR}}.{{MINOR}}.{{PATCH}}"
+tag_format = "prod-{{ MAJOR | pad-number 4 }}.{{ MINOR | pad-number 2 }}.{{ PATCH | pad-number 2 }}"
 
 [scripts]
 publish = "node publish.js"
