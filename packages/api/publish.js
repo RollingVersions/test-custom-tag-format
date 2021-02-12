@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-const isVersion = /^\d+\.\d+\.\d+(\-canary\-\d+)?$/.test(env.NEW_VERSION);
+const isVersion = (str) => /^\d+\.\d+\.\d+(\-canary\-\d+)?$/.test(str);
 
 const env = {};
 for (const key of [

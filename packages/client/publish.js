@@ -1,7 +1,7 @@
 const assert = require('assert');
 const fs = require('fs');
 
-const isVersion = /^\d+\.\d+\.\d+(\-canary\-\d+)?$/.test(env.NEW_VERSION);
+const isVersion = (str) => /^\d+\.\d+\.\d+(\-canary\-\d+)?$/.test(str);
 
 const env = {};
 for (const key of [
@@ -16,6 +16,12 @@ for (const key of [
   'NEW_VERSION',
 ]) {
   env[key] = process.env[key];
+}
+
+if (process.argv.includes('--dry-run')) {
+  console.log('DEPLOYING CLIENT (dry run)', env);
+} else {
+  console.log('DEPLOYING CLIENT', env);
 }
 
 assert(env.CANARY === undefined || /^\d+$/.test(env.CANARY));
@@ -34,9 +40,3 @@ assert.deepStrictEqual(
   JSON.parse(JSON.stringify(env)),
   JSON.parse(fs.readFileSync(`${__dirname}/prepublish-env.json`, `utf8`))
 );
-
-if (process.argv.includes('--dry-run')) {
-  console.log('DEPLOYING CLIENT (dry run)', env);
-} else {
-  console.log('DEPLOYING CLIENT', env);
-}

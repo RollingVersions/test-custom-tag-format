@@ -1,7 +1,7 @@
 const assert = require('assert');
 const fs = require('fs');
 
-const isVersion = /^\d+\.\d+\.\d+(\-canary\-\d+)?$/.test(env.NEW_VERSION);
+const isVersion = (str) => /^\d+\.\d+\.\d+(\-canary\-\d+)?$/.test(str);
 
 const env = {};
 for (const key of [
@@ -17,6 +17,8 @@ for (const key of [
 ]) {
   env[key] = process.env[key];
 }
+
+console.log(env);
 
 assert(env.CANARY === undefined || /^\d+$/.test(env.CANARY));
 assert.strictEqual(
